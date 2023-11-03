@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Move : MonoBehaviour
@@ -10,7 +11,13 @@ public class Move : MonoBehaviour
     bool move = true;
     string entrada = string.Empty;
     int contador = 0;
+    bool direction = false;
 
+
+    public bool moveUp = true;
+    public bool moveDown = true;
+    public bool moveRight = true;
+    public bool moveLeft = true;
 
 
     // Start is called before the first frame update
@@ -27,28 +34,28 @@ public class Move : MonoBehaviour
         if (move)
         {
             
-            if (Input.GetKey("right"))
+            if (Input.GetKey("right") && moveRight)
             {
                 entrada = "right";
                 move = false;
                 contador++;
             }
             
-            else if (Input.GetKey("left"))
+            else if (Input.GetKey("left") && moveLeft)
             {
                 entrada = "left";
                 move = false;
                 contador++;
             }
 
-            else if (Input.GetKey("up"))
+            else if (Input.GetKey("up") && moveUp)
             {
                 entrada = "up";
                 move = false;
                 contador++;
             }
 
-            else if (Input.GetKey("down"))
+            else if (Input.GetKey("down") && moveDown)
             {
                 entrada = "down";
                 move = false;
@@ -62,25 +69,37 @@ public class Move : MonoBehaviour
             switch (entrada) {
                 case "right":
                     gameObject.transform.Translate(0.00485f, 0, 0);
+                    direction = moveRight;
                     break;
 
                 case "left":
                     gameObject.transform.Translate(-0.00485f, 0, 0);
+                    direction = moveLeft;
                     break;
                 case "up":
                     gameObject.transform.Translate(0,0.00485f,0);
+                    direction = moveUp;
                     break;
 
                 case "down":
                     gameObject.transform.Translate(0,-0.00485f, 0);
+                    direction = moveDown;
                     break;
 
             }
 
             contador++;
-            if (contador >= 100) { 
-                contador = 0;
-                move = true;
+            if (contador >= 100) {
+
+                if (direction) {
+                    contador = 1;
+                }
+                else
+                {
+                    contador = 0;
+                    move = true;
+                }
+                
             }
 
 
@@ -88,7 +107,6 @@ public class Move : MonoBehaviour
 
         
 
-        
-        
     }
+
 }
