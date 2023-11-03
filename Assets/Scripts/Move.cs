@@ -65,31 +65,31 @@ public class Move : MonoBehaviour
 
         if (contador > 0) {
 
-            // hay que sumar 0.480
+            // hay que sumar 0.480  485
             switch (entrada) {
                 case "right":
-                    gameObject.transform.Translate(0.00485f, 0, 0);
+                    gameObject.transform.Translate(0.00647f * Time.deltaTime, 0, 0);
                     direction = moveRight;
                     break;
 
                 case "left":
-                    gameObject.transform.Translate(-0.00485f, 0, 0);
+                    gameObject.transform.Translate(-0.00647f * Time.deltaTime * 20, 0, 0);
                     direction = moveLeft;
                     break;
                 case "up":
-                    gameObject.transform.Translate(0,0.00485f,0);
+                    gameObject.transform.Translate(0,0.00647f,0);
                     direction = moveUp;
                     break;
 
                 case "down":
-                    gameObject.transform.Translate(0,-0.00485f, 0);
+                    gameObject.transform.Translate(0,-0.00647f, 0);
                     direction = moveDown;
                     break;
 
             }
 
             contador++;
-            if (contador >= 100) {
+            if (contador >= 10) {
 
                 if (direction) {
                     contador = 1;
